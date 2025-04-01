@@ -1,4 +1,4 @@
-# Prova API
+He seguido todas las instrucciones y requisitos del ejercicio y los he cumplido, pero he encontrado un problema. Solo se ha guardado el primer cambio en el historial; los cambios posteriores no aparecen ni en el historial del frontend ni en la base de datos. Creo que la causa podría ser que intenté manejar simultáneamente dos colecciones (gyms y combates), lo que hizo que el enfoque fuera demasiado general. Para solucionarlo, dividiría el proceso: primero aplicaría los cambios en gimnasios y, una vez resuelto, implementaría los cambios en combates.
 
 ## Descripció
 Una API bàsica desenvolupada en Node.js amb TypeScript, utilitzant Express i Mongoose per a la gestió de dades en MongoDB. A més, s'inclou documentació amb Swagger.
