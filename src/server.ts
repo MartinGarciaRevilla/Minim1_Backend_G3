@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import userRoutes from './modules/users/user_routes.js'; // Nota el .js al final
 import gymRoutes from './modules/gyms/gym_routes.js'; // Nota el .js al final
 import combatRoutes from './modules/combats/combat_routes.js'; // Nota el .js al final
+import changeLogRoutes from './modules/ChangeLog/change_log_routes.js'; // Nueva ruta para el historial de cambios
 import { corsHandler } from './middleware/corsHandler.js';
 import { loggingHandler } from './middleware/loggingHandler.js';
 import { routeNotFound } from './middleware/routeNotFound.js';
@@ -42,6 +43,10 @@ const swaggerOptions = {
             {
                 name: 'Combat',
                 description: 'Rutas relacionadas con los combates',
+            },
+            {
+                name: 'ChangeLog',
+                description: 'Rutas relacionadas con el historial de cambios',
             }
           ],
         servers: [
@@ -50,7 +55,7 @@ const swaggerOptions = {
             }
         ]
     },
-    apis: ['./modules/users/*.js', './modules/gyms/*.js', './modules/combats/*.js'] // Asegúrate de que esta ruta apunta a tus rutas
+    apis: ['./modules/users/*.js', './modules/gyms/*.js', './modules/combats/*.js', './modules/ChangeLog/*.js'] // Asegúrate de que esta ruta apunta a tus rutas
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
@@ -66,17 +71,18 @@ app.use(cors({
 app.use(express.json());
 app.use(loggingHandler);
 app.use(corsHandler);
-//rutas
+// Rutas
 app.use('/api', userRoutes);
 app.use('/api', gymRoutes);
 app.use('/api', combatRoutes);
-// Rutes de prova
+app.use('/api', changeLogRoutes); // Nueva ruta añadida
+
+// Ruta de prueba
 app.get('/', (req, res) => {
     res.send('Welcome to my API');
 });
 
 // Conexión a MongoDB
-//mongoose;
 mongoose
     .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/proyecto')
     .then(() => console.log('Connected to DB'))
